@@ -1,6 +1,6 @@
 local utils = require("oklch-color-picker.utils")
 
-local version = "2.2.1"
+local version = "2.3.0"
 
 local github_url = "https://github.com/eero-lehtinen/oklch-color-picker/releases/download/" .. version .. "/"
 
@@ -186,7 +186,7 @@ function M.download_app(callback)
         os.remove(cwd .. "/" .. archive_basename)
 
         utils.log(function()
-          return "Picker app downloaded to " .. cwd .. "/" .. utils.executable()
+          return "Picker app v" .. version .. " downloaded to " .. cwd .. "/" .. utils.executable()
         end, vim.log.levels.INFO)
 
         callback(nil)
@@ -262,7 +262,7 @@ function M.download_parser(callback)
       M.write_parser_version()
 
       utils.log(function()
-        return "Parser downloaded to " .. cwd .. "/" .. out_lib
+        return "Parser v" .. version .. " downloaded to " .. cwd .. "/" .. out_lib
       end, vim.log.levels.INFO)
       callback(nil)
     end)

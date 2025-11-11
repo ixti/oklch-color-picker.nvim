@@ -192,25 +192,11 @@ function M.download_app(callback)
         callback(nil)
       end)
 
-      if utils.is_windows() then
-        vim.system(
-          { "powershell", "-command", "Expand-Archive", "-Path", archive, "-DestinationPath", "." },
-          { cwd = cwd },
-          on_extracted
-        )
-      elseif utils.is_wsl_and_use_exe() then
-        if vim.fn.executable("unzip") ~= 1 then
-          callback("'unzip' not found, please install it")
-          return
-        end
-        vim.system({ "unzip", archive }, { cwd = cwd }, on_extracted)
-      else
-        if vim.fn.executable("tar") ~= 1 then
-          callback("'tar' not found, please install it")
-          return
-        end
-        vim.system({ "tar", "xzf", archive }, { cwd = cwd }, on_extracted)
+      if vim.fn.executable("tar") ~= 1 then
+        callback("'tar' not found, please install it")
+        return
       end
+      vim.system({ "tar", "xzf", archive }, { cwd = cwd }, on_extracted)
     end)
   )
 end

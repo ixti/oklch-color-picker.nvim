@@ -165,7 +165,7 @@ function M.download_app(callback)
           return
         end
 
-        os.remove(cwd .. "/" .. archive)
+        vim.uv.fs_unlink(cwd .. "/" .. archive)
         local success, err = vim.uv.fs_rename(
           cwd .. "/" .. archive_basename .. "/" .. utils.executable(),
           cwd .. "/" .. utils.executable()
@@ -183,7 +183,7 @@ function M.download_app(callback)
           vim.uv.fs_chmod(cwd .. "/" .. utils.executable(), 493) -- 0755 in octal
         end
 
-        os.remove(cwd .. "/" .. archive_basename)
+        vim.uv.fs_rmdir(cwd .. "/" .. archive_basename)
 
         utils.log(function()
           return "Picker app v" .. version .. " downloaded to " .. cwd .. "/" .. utils.executable()

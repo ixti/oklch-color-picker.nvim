@@ -117,10 +117,10 @@ function M.get_target_info(kind)
 
   if jit.os == "OSX" and rust_arch then
     return nil, rust_arch .. "-apple-darwin", ".tar.gz"
-  elseif (jit.os == "Windows" or (kind == "app" and utils.is_wsl_and_use_exe())) and rust_arch == "x86_64" then
-    return nil, "x86_64-pc-windows-msvc", ".zip"
-  elseif jit.os == "Linux" and rust_arch == "x86_64" then
-    return nil, "x86_64-unknown-linux-gnu", ".tar.gz"
+  elseif (jit.os == "Windows" or (kind == "app" and utils.is_wsl_and_use_exe())) and rust_arch then
+    return nil, rust_arch .. "-pc-windows-msvc", ".zip"
+  elseif jit.os == "Linux" and rust_arch then
+    return nil, rust_arch .. "-unknown-linux-gnu", ".tar.gz"
   else
     return string.format("Platform (%s - %s) not currently supported", jit.os, jit.arch), "", ""
   end
